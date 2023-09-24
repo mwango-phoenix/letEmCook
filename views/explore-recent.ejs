@@ -1,0 +1,32 @@
+<h1 class="pb-4">Recently Added</h1>
+<div class="row row-cols-2 row-cols-lg-5 g-2 g-lg-3">
+  
+    <% if(recipeList != '') { %>
+        <%  for(let count = 0; count < 20; count++ ){  %>
+            <a href="/recipe/<%- recipeList[count].slug %>" class="col text-center category__link">
+                <div class="category__img category__img--large shadow">
+                    <img src="/uploads/<%- recipeList[count].image %>" alt="<%- recipeList[count].name %>" loading="lazy" />
+                </div>
+                <div class="pt-1"><%- recipeList[count].name %></div>
+            </a>
+        <% } %>
+    <% }else { %>
+        <p>No items.</p>
+    <% } %>
+  </div>
+
+  <!-- Pagination controls -->
+<div class="pagination">
+    <% if (currentPage > 1) { %>
+    <a href="/explore-recent?page=<%= currentPage - 1 %>" class="pagination-link">&laquo;</a>
+    <% } %>
+  
+    <!-- add in page numbers -->
+    <% for (let i = 1; i <= totalPages; i++) { %>
+      <a href="/explore-recent?page=<%= i %>" class="<%= currentPage === i ? 'pagination-link active' : 'pagination-link' %>"><%= i %></a>
+    <% } %>  
+  
+    <% if (currentPage < totalPages) { %>
+    <a href="/explore-recent?page=<%= currentPage + 1 %>" class="pagination-link">&raquo;</a>
+    <% } %>
+  </div>

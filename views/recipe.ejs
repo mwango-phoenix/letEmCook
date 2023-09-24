@@ -1,0 +1,70 @@
+<% if(recipe != null) {%>
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="/">Home</a></li>
+    <li class="breadcrumb-item"><a href="/categories">Categories</a></li>
+    <li class="breadcrumb-item active" aria-current="page"><%- recipe.name %></li>
+  </ol>
+</nav>
+
+<div class="row">
+  <div class="col-12 col-md-4">
+    <!-- recipe image -->
+    <img src="/uploads/<%- recipe.image %>" alt="<%- recipe.name %>" style="top: 20px" class="img-fluid sticky-top" loading="lazy">
+  </div>
+  <div class="col-12 col-md-8">
+    <div class="row">
+      <div class="col-12">
+        <h1><%- recipe.name %></h1>
+      </div>
+      <div class="col-12 mb-4">
+        <!-- category tag -->
+        <% if (recipe.category != null) {
+            recipe.category.forEach(function (ctgy, index) { %>
+              <a href="/categories/<%- ctgy %>" class="tag_link"><i class="bi bi-tag"><%-ctgy%></i></a>
+        <%})}%>
+      </div>
+      <div class="col-12">
+        <em><%- recipe.description %></em>
+      </div>
+      <div>
+        <% if(recipe.servingSize != null) { %>
+          <p>Servings: <%- recipe.servingSize %> </p>
+        <% } %>
+      </div>
+      <div class="row pt-4">
+        <div class="col-12">
+          <!-- List of ingredients -->
+          <h4>Ingredients</h4>
+          <ul class="list-group list-group-flush">
+            <!-- go through each ingredient from array -->
+            <% if (recipe.ingredients != null) { recipe.ingredients.forEach(function (ingredients, index) { %>
+              <li class="list-group-item"><%= ingredients%></li>
+            <%})}%>
+          </ul>
+        </div>
+      </div>
+      <div class="row pt-5">
+        <div class="col-12">
+          <!-- List of Instructions -->
+          <h4>Instructions</h4>
+          <ol>
+            <!-- go through each instruction from array -->
+            <% if (recipe.instructions != null) {recipe.instructions.forEach(function (instruction, index) { %>
+              <li class="pt-2"><%= instruction %></li>
+            <%})}%>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="float-end mt-3">
+  <a href="/edit/<%= recipe.id %>" class="btn btn-outline-primary"><i class="bi bi-pencil-square"></i> Edit</a>
+  <form method="POST" action="/recipe/<%= recipe.id %>?_method=DELETE" class="d-inline">
+    <button type="submit" class="btn btn-outline-danger"><i class="bi bi-trash"></i> Delete</button>
+  </form>
+</div>
+<% } else {%>
+<p>Recipe not found</p>
+<% } %>

@@ -1,0 +1,106 @@
+<div class="px-4 py-5 my-5 text-center">
+  <h1 class="display-5 fw-bold">Add a Recipe</h1>
+  <div class="col-lg-6 mx-auto">
+    <p class="lead">Add a new recipe you stumbled upon</p>
+  </div>
+</div>
+
+
+<div class="row justify-content-center">
+  <!-- if submit successful display success message -->
+  <% if(submitObj != '') { %>
+  <div class="col-8 alert alert-success" role="alert">
+    <%= submitObj %>
+  </div>
+  <% } %>
+
+  <!-- if submission error, display error message -->
+  <% if(errorObj != '') { %>
+  <div class="col-8 alert alert-danger" role="alert">
+    <%= errorObj[0].message %>
+  </div>
+  <% } %>
+  <div class="col-8">
+
+    <form action="/submit" enctype="multipart/form-data" method="POST">
+
+      <div class="row g-3">
+
+        <div class="col-12">
+          <label for="name" class="form-label">Recipe Name</label>
+          <input type="text" name="name" id="name" class="form-control" required>
+        </div>
+
+        <div class="col-12">
+          <label for="description" class="form-label">Description</label>
+          <input type="text" name="description" id="description" class="form-control" required>
+        </div>
+
+        <div class="col-12">
+          <label for="servingSize" class="form-label">Serving Size</label>
+          <input type="text" name="servingSize" id="servingSize" class="form-control">
+        </div>
+
+        <div class="col-12">
+          <label for="ingredients" class="form-label">Ingredients</label><br>
+          <div class="ingredientList">
+            <div class="ingredientDiv mb-1">
+              <input type="text" name="ingredients" class="form-control">
+            </div>
+          </div>
+        </div>
+
+        <div class="col-12">
+          <button type="button" class="btn btn-outline-primary" id="addIngredientsBtn">+ Ingredient</button>
+          <button type="button" class="btn btn-outline-primary" id="rmvIngredientsBtn">- Ingredient</button>
+        </div>
+
+        <div class="col-12">
+          <label for="instructions" class="form-label">Instructions</label>
+          <div>
+            <ol class="instructionList">
+              <li class="instructionDiv mb-1"><input type="text" name="instructions" class="form-control"></li>
+            </ol>
+          </div>
+        </div>
+
+        <div class="col-12">
+          <button type="button" class="btn btn-outline-primary" id="addStepBtn">+ Step</button>
+          <button type="button" class="btn btn-outline-primary" id="rmvStepBtn">- Step</button>
+        </div>
+
+        <div class="col-12">
+          <label for="category" class="form-label">Select Category</label>
+          <div>
+            <select name="category" class="selectpicker form-control" multiple data-live-search="true">
+              <option value="Drinks">Drinks </option>
+              <option value="Breakfast">Breakfast</option>
+              <option value="Lunch">Lunch</option>
+              <option value="Dinner">Dinner</option>
+              <option value="Dessert">Dessert</option>
+              <option value="Snack">Snack</option>
+              <option value="Sauces & Spreads">Sauces & Spreads</option>
+              <option value="Soups & Stews">Soups & Stews</option>
+              <option value="Side Dish">Side Dish</option>
+              <option value="Bread">Bread</option>
+              <option value="Pastry">Pastry</option>
+              <option value="Pancakes, Waffles, Crepes">Pancakes, Waffles, Crepes</option>
+              <option value="Street Food">Street Food</option>
+            </select>
+          </div>
+        </div>
+
+
+        <div class="col-12">
+          <label for="image">Product Image</label>
+          <input type="file" class="form-control" name="image">
+        </div>
+
+        <div class="col-12">
+          <button type="submit" class="btn btn-primary">Submit Recipe</button>
+        </div>
+
+      </div>
+    </form>
+  </div>
+</div>

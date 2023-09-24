@@ -1,0 +1,100 @@
+<div class="row flex-lg-row-reverse align-items-center g-5 py-4 mb-4">
+  <div class="col-12 col-lg-6">
+    <img
+      src="/img/food.jpg"
+      alt="Cooking"
+      width="607"
+      height="510"
+      class="d-block mx-lg-auto img-fluid"
+      loading="lazy"
+    />
+  </div>
+  <div class="col-12 col-lg-6">
+    <h1 class="display-5 fw-bold-mb-3">My recipe Collection</h1>
+    <p class="lead">
+      Exploring different cuisines to learn more about different foods and
+      switch up my palate. For me to try when I'm bored and want to eat
+      something new.
+    </p>
+
+    <div class="d-grid gap-2 d-md-flex justify-content-md-start">
+      <a href="/random" class="btn btn-primary btn-dark btn-lg px-4 me-md-2"
+        >Random</a
+      >
+    </div>
+  </div>
+</div>
+
+<!-- Categories  -->
+<section class="pb-4 pt-4">
+  <div class="d-flex mb-2 align-items-center">
+    <h2>Categories</h2>
+  </div>
+  <div class="row row-cols-2 row-cols-lg-6 g-2 g-lg-3">
+    <% if(categories != '') { %>
+        <% categories.forEach(function(category, index){  %>
+            <a href="/categories/<%- category.name %>" class="col text-center category__link">
+                <div class="category__img shadow">
+                    <img src="/img/<%- category.image %>" alt="<%- category.name %>" loading="lazy" />
+                </div>
+                <div class="pt-1"><%- category.name %></div>
+            </a>
+        <% }) %>
+    <% } %>
+    <!-- <a href="#" class="col text-center category__link">
+      <div class="category__img shadow">
+        <img src="/img/drinks.jpeg" alt="Drinks" loading="lazy" />
+      </div>
+      <div class="pt-1">Drinks</div>
+    </a> -->
+
+    <!-- Link to view all categories on categories page -->
+    <a href="/categories" class="col text-center category__link">
+      <div class="category__img shadow">
+        <img src="/img/drinks.jpeg" alt="Drinks" loading="lazy" />
+      </div>
+      <div class="pt-1">View Categories</div>
+    </a>
+  </div>
+</section>
+
+<!-- Recommendations -->
+<section class="pb-4 pt-4">
+  <div class="d-flex mb-2 align-items-center">
+    <h2>Recently Added</h2>
+    <a href="/explore-recent" class="ms-auto">View More</a>
+  </div>
+
+  <div class="row row-cols-2 row-cols-lg-5 g-2 g-lg-3">
+
+    <% if(recent != '') { %>
+        <% recent.latest.forEach(function(recipe, index){  %>
+            <a href="/recipe/<%- recipe.slug %>" class="col text-center category__link">
+                <div class="category__img category__img--large shadow">
+                    <img src="/uploads/<%- recipe.image %>" alt="<%- recipe.name %>" loading="lazy" />
+                </div>
+                <div class="pt-1"><%- recipe.name %></div>
+            </a>
+        <% }) %>
+    <% } %>
+
+    <!-- <a href="/recipe/#" class="col text-center category__link">
+      <div class="category__img category__img--large shadow">
+        <img src="/img/drinks.jpeg" alt="Drinks" loading="lazy" />
+      </div>
+      <div class="pt-1">Drinks</div>
+    </a> -->
+  </div>
+</section>
+
+<!-- submit recipe -->
+<section class="px-4 py-5 my-5 text-center">
+  <!-- <img src="img/publish.jpg" alt="Publish recipe" class="d-block mx-auto mb-4 img-fluid" loading="lazy" width="566" height="208"> -->
+  <h1 class="display-5 fw-bold">Add recipe</h1>
+  <div class="col-lg-6 mx-auto">
+    <p class="lead mb-4">Submit a new recipe to try.</p>
+    <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+      <a href="/submit" class="btn btn-primary btn-dark btn-lg">Submit</a>
+    </div>
+  </div>
+</section>

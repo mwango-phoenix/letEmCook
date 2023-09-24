@@ -1,0 +1,90 @@
+<form action="/recipes/update/<%= recipe._id %>" method="post">
+  <input type="hidden" name="id" value="<%= recipe._id %>">
+  <% if(recipe != null) {%>
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="/">Home</a></li>
+      <li class="breadcrumb-item"><a href="/categories">Categories</a></li>
+      <li class="breadcrumb-item active" aria-current="page"><%- recipe.name %></li>
+    </ol>
+  </nav>
+
+  <div class="row">
+    <div class="col-12 col-md-4">
+      <!-- recipe image -->
+      <img src="/uploads/<%- recipe.image %>" alt="<%- recipe.name %>" style="top: 20px" class="img-fluid sticky-top" loading="lazy">
+    </div>
+    <div class="col-12 col-md-8">
+      <div class="row">
+        <div class="col-12">
+          <h1><%- recipe.name %></h1>
+        </div>
+        <div class="col-12 mb-4">
+          <!-- category tag -->
+          <% if (recipe.category != null) {
+                recipe.category.forEach(cat => { %>
+          <input type="checkbox" name="categories[]" value="<%= cat %>" checked> <%= cat %>
+          <% })} %>
+        </div>
+        <div class="col-12">
+          <em><%- recipe.description %></em>
+        </div>
+        <div>
+          <% if(recipe.servingSize != null) { %>
+          <p>Servings: <%- recipe.servingSize %> </p>
+          <% } %>
+        </div>
+        <div class="row pt-4">
+          <div class="col-12">
+            <!-- List of ingredients -->
+            <h4>Ingredients</h4>
+            <div class="ingredient-list">
+              <!-- go through each ingredient from array -->
+              <% if (recipe.ingredients != null) { recipe.ingredients.forEach((ing, index) => { %>
+
+              <div class="ingredient">
+                <input name="ingredients[]" value="<%= ing %>">
+                <button type="button" class="btn btn-delete" onclick="deleteIngredient('<%= index %>')">X</button>
+              </div>
+
+              <% })}%>
+            </div>
+          </div>
+          <div class="col-12">
+            <button type="button" class="btn btn-outline-primary" id="addIngBtn">+ Ingredient</button>
+            <button type="button" class="btn btn-outline-primary" id="rmvIngBtn">- Ingredient</button>
+          </div>
+        </div>
+        <div class="row pt-5">
+          <div class="col-12">
+            <!-- List of Instructions -->
+            <h4>Instructions</h4>
+            <div class="instruction-list">
+              <!-- go through each instruction from array -->
+              <% if (recipe.instructions != null) { recipe.instructions.forEach((step, index) => { %>
+
+              <div class="instruction">
+                <input name="instructions[]" value="<%= step %>">
+                <button type="button" class="btn btn-delete" onclick="deleteStep('<%= index %>')">X</button>
+              </div>
+
+              <% })} %>
+            </div>
+          </div>
+          <div class="col-12">
+            <button type="button" class="btn btn-outline-primary" id="addInsBtn">+ Instruction</button>
+            <button type="button" class="btn btn-outline-primary" id="rmvInsBtn">- Instruction</button>
+          </div>
+        </div>
+        <div class="float-end mt-3">
+          <button type="submit">
+            <i class="bi bi-save"></i> Save Recipe
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <% } else {%>
+  <p>Recipe not found</p>
+  <% } %>
+</form>
