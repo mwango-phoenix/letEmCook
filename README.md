@@ -1,7 +1,7 @@
 # recipes
 Continuously growing collection of recipes 
 
-[Recipe site](recipe-site-1514.onrender.com) *will take a while to initially load*
+[Recipe site](https://letercook.onrender.com/) *will take a while to initially load*
 
 ![image](https://github.com/mwango-phoenix/letHerCook/assets/67757350/78105ded-f2bb-49e2-9a78-e5fbfa8ca791)
 
