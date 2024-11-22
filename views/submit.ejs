@@ -104,3 +104,39 @@
     </form>
   </div>
 </div>
+
+<script>
+  // Function to handle the paste event for Ingredients
+  document.querySelector('.ingredientList').addEventListener('paste', (event) => {
+    handlePaste(event, 'ingredientDiv', '.ingredientList');
+  });
+  // Function to handle the paste event for Instructions
+  document.querySelector('.instructionList').addEventListener('paste', (event) => {
+    handlePaste(event, 'instructionDiv', '.instructionList', true);
+  });
+  // General function to handle paste and split content
+  function handlePaste(event, className, containerSelector, isOrderedList = false) {
+    event.preventDefault();
+    // Get pasted data and split into lines
+    const pastedData = event.clipboardData.getData('text/plain');
+    const lines = pastedData.split(/\r?\n/).filter(line => line.trim() !== '');
+    // Get the target input where the paste occurred
+    const targetInput = event.target;
+    
+    // Handle single-line paste: append to current input value
+    if (lines.length === 1) {
+      targetInput.value += lines[0].trim(); // Append the pasted line to the current value
+      return;
+    }
+    // Handle multi-line paste: remove current input and create new fields
+    const container = document.querySelector(containerSelector);
+    targetInput.parentNode.remove();
+    // Append new fields for each line
+    lines.forEach(line => {
+      const newItem = document.createElement(isOrderedList ? 'li' : 'div');
+      newItem.className = className + ' mb-1';
+      newItem.innerHTML = `<input type="text" name="${isOrderedList ? 'instructions' : 'ingredients'}" class="form-control" value="${line.trim()}">`;
+      container.appendChild(newItem);
+    });
+  }
+</script>
